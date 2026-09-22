@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ÚtilHub V21 — NOVA FLOW 5.0</title>
+
+  <meta
+    name="description"
+    content="ÚtilHub V21: herramientas útiles, productividad, conversiones y 80 modos de NOVA FLOW."
+  >
+
+  <meta name="theme-color" content="#07111f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <!-- =====================================================
+       ICONO DE ÚTILHUB — INTEGRADO EN CÓDIGO
+       No necesita imagen externa.
+       ===================================================== -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236ee7ff'/%3E%3Cstop offset='.5' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3Cfilter id='s'%3E%3CfeGaussianBlur stdDeviation='3' result='b'/%3E%3CfeMerge%3E%3CfeMergeNode in='b'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='128' height='128' rx='30' fill='%23050914'/%3E%3Ccircle cx='64' cy='64' r='43' fill='none' stroke='url(%23g)' stroke-width='7' filter='url(%23s)'/%3E%3Cpath d='M39 74c7 12 20 19 34 17 14-2 24-12 27-26' fill='none' stroke='url(%23g)' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M48 54c5-7 13-11 22-11 8 0 15 3 20 8' fill='none' stroke='%23fff' stroke-opacity='.9' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='62' r='5' fill='%236ee7ff'/%3E%3Ccircle cx='81' cy='57' r='5' fill='%23ec4899'/%3E%3C/svg%3E"
+  >
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       FONDO NOVA FLOW
+       ===================================================== -->
+
+  <canvas id="nova" aria-hidden="true"></canvas>
+  <div id="novaGlow" aria-hidden="true"></div>
+  <div id="noise" aria-hidden="true"></div>
+
+  <!-- =====================================================
+       BARRA SUPERIOR
+       ===================================================== -->
+
+  <header class="topbar">
+
+    <a href="#inicio" class="brand" aria-label="Ir al inicio">
+      <span class="brandIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle
+            cx="32"
+            cy="32"
+            r="22"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+          />
+          <path
+            d="M18 39c7 9 18 12 28 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <path
+            d="M23 25c4-5 10-7 16-6 5 1 9 4 12 8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+
+      <span class="brandText">
+        <strong>ÚtilHub</strong>
+        <small>V21</small>
+      </span>
+    </a>
+
+    <nav class="topActions" aria-label="Controles principales">
+
+      <button
+        id="themeBtn"
+        class="iconBtn"
+        type="button"
+        title="Cambiar tema"
+        aria-label="Cambiar tema"
+      >
+        ◐
+      </button>
+
+      <button
+        id="motionBtn"
+        class="iconBtn"
+        type="button"
+        title="Activar o desactivar animaciones"
+        aria-label="Activar o desactivar animaciones"
+      >
+        ✦
+      </button>
+
+      <button
+        id="focusBtn"
+        class="iconBtn"
+        type="button"
+        title="Modo concentración"
+        aria-label="Modo concentración"
+      >
+        ⌁
+      </button>
+
+    </nav>
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO PRINCIPAL
+       ===================================================== -->
+
+  <main id="inicio">
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <section class="hero section">
+
+      <div class="heroContent">
+
+        <div class="eyebrow">
+          <span class="statusDot"></span>
+          ÚTILHUB V21
+          <span>•</span>
+          NOVA FLOW 5.0
+        </div>
+
+        <h1>
+          Todo lo útil,
+          <span>en un solo lugar.</span>
+        </h1>
+
+        <p class="heroText">
+          Herramientas para calcular, convertir, organizar,
+          estudiar, crear y resolver tareas cotidianas.
+        </p>
+
+        <div class="heroButtons">
+
+          <button
+            id="exploreBtn"
+            class="primaryBtn"
+            type="button"
+          >
+            Explorar herramientas
+          </button>
+
+          <button
+            id="novaBtn"
+            class="secondaryBtn"
+            type="button"
+          >
+            ✦ NOVA FLOW
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Estadísticas -->
+
+      <div class="statsGrid">
+
+        <article class="statCard">
+          <span id="toolCount">0</span>
+          <small>Herramientas</small>
+        </article>
+
+        <article class="statCard">
+          <span id="favoriteCount">0</span>
+          <small>Favoritos</small>
+        </article>
+
+        <article class="statCard">
+          <span id="recentCount">0</span>
+          <small>Recientes</small>
+        </article>
+
+        <article class="statCard">
+          <span>80</span>
+          <small>Animaciones</small>
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         NOVA FLOW
+         =================================================== -->
+
+    <section
+      id="novaSection"
+      class="novaSection section"
+    >
+
+      <div class="sectionHeading">
+
+        <div>
+          <span class="sectionLabel">SISTEMA VISUAL</span>
+
+          <h2>NOVA FLOW 5.0</h2>
+
+          <p>
+            80 modos visuales para personalizar la experiencia.
+          </p>
+        </div>
+
+        <div class="novaStatus">
+
+          <span id="novaStatus">
+            ACTIVO
+          </span>
+
+          <span>
+            FPS:
+            <b id="fps">--</b>
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="novaDisplay">
+
+        <div class="novaOrbital orbitalOne"></div>
+        <div class="novaOrbital orbitalTwo"></div>
+        <div class="novaOrbital orbitalThree"></div>
+
+        <div class="novaCenter">
+
+          <span class="novaSmall">
+            MODO ACTUAL
+          </span>
+
+          <strong id="novaModeName">
+            COSMIC
+          </strong>
+
+          <span class="novaVersion">
+            NOVA FLOW 5.0
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Controles -->
+
+      <div class="novaControls">
+
+        <label class="rangeControl">
+          <span>
+            Intensidad
+            <output id="novaIntensityValue">80%</output>
+          </span>
+
+          <input
+            id="novaIntensity"
+            type="range"
+            min="0"
+            max="100"
+            value="80"
+          >
+        </label>
+
+
+        <label class="selectControl">
+
+          <span>Rendimiento</span>
+
+          <select id="performanceSelect">
+
+            <option value="high">
+              Alto
+            </option>
+
+            <option value="balanced" selected>
+              Equilibrado
+            </option>
+
+            <option value="performance">
+              Ahorro
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <!-- =================================================
+           SELECTOR DE 80 ANIMACIONES
+           ================================================= -->
+
+      <div
+        id="novaModes"
+        class="novaModes"
+        aria-label="Modos de NOVA FLOW"
+      >
+
+        <!-- 1 - 20 -->
+
+        <button class="novaMode active" data-mode="cosmic">01 · Cosmic</button>
+        <button class="novaMode" data-mode="aurora">02 · Aurora</button>
+        <button class="novaMode" data-mode="pulse">03 · Pulse</button>
+        <button class="novaMode" data-mode="matrix">04 · Matrix</button>
+        <button class="novaMode" data-mode="nebula">05 · Nebula</button>
+        <button class="novaMode" data-mode="waves">06 · Waves</button>
+        <button class="novaMode" data-mode="starfield">07 · Starfield</button>
+        <button class="novaMode" data-mode="vortex">08 · Vortex</button>
+        <button class="novaMode" data-mode="firefly">09 · Firefly</button>
+        <button class="novaMode" data-mode="rain">10 · Rain</button>
+        <button class="novaMode" data-mode="grid">11 · Grid</button>
+        <button class="novaMode" data-mode="spiral">12 · Spiral</button>
+        <button class="novaMode" data-mode="orbit">13 · Orbit</button>
+        <button class="novaMode" data-mode="plasma">14 · Plasma</button>
+        <button class="novaMode" data-mode="dna">15 · DNA</button>
+        <button class="novaMode" data-mode="snow">16 · Snow</button>
+        <button class="novaMode" data-mode="lightning">17 · Lightning</button>
+        <button class="novaMode" data-mode="galaxy">18 · Galaxy</button>
+        <button class="novaMode" data-mode="comet">19 · Comet</button>
+        <button class="novaMode" data-mode="quantum">20 · Quantum</button>
+
+        <!-- 21 - 40 -->
+
+        <button class="novaMode" data-mode="solar">21 · Solar</button>
+        <button class="novaMode" data-mode="meteor">22 · Meteor</button>
+        <button class="novaMode" data-mode="bubbles">23 · Bubbles</button>
+        <button class="novaMode" data-mode="hexgrid">24 · Hexgrid</button>
+        <button class="novaMode" data-mode="ripples">25 · Ripples</button>
+        <button class="novaMode" data-mode="sparks">26 · Sparks</button>
+        <button class="novaMode" data-mode="petals">27 · Petals</button>
+        <button class="novaMode" data-mode="constellation">28 · Constellation</button>
+        <button class="novaMode" data-mode="tunnel">29 · Tunnel</button>
+        <button class="novaMode" data-mode="rings">30 · Rings</button>
+        <button class="novaMode" data-mode="glitch">31 · Glitch</button>
+        <button class="novaMode" data-mode="spectrum">32 · Spectrum</button>
+        <button class="novaMode" data-mode="fractal">33 · Fractal</button>
+        <button class="novaMode" data-mode="satellites">34 · Satellites</button>
+        <button class="novaMode" data-mode="electric">35 · Electric</button>
+        <button class="novaMode" data-mode="chrono">36 · Chrono</button>
+        <button class="novaMode" data-mode="particles">37 · Particles</button>
+        <button class="novaMode" data-mode="mandala">38 · Mandala</button>
+        <button class="novaMode" data-mode="eclipse">39 · Eclipse</button>
+        <button class="novaMode" data-mode="crystal">40 · Crystal</button>
+
+        <!-- 41 - 60 -->
+
+        <button class="novaMode" data-mode="hologram">41 · Hologram</button>
+        <button class="novaMode" data-mode="portal">42 · Portal</button>
+        <button class="novaMode" data-mode="rainbow">43 · Rainbow</button>
+        <button class="novaMode" data-mode="circuits">44 · Circuits</button>
+        <button class="novaMode" data-mode="digitalfire">45 · Digital Fire</button>
+        <button class="novaMode" data-mode="luminous">46 · Luminous</button>
+        <button class="novaMode" data-mode="ringspace">47 · Ringspace</button>
+        <button class="novaMode" data-mode="sunset">48 · Sunset</button>
+        <button class="novaMode" data-mode="deepsea">49 · Deep Sea</button>
+        <button class="novaMode" data-mode="lava">50 · Lava</button>
+        <button class="novaMode" data-mode="clouds">51 · Clouds</button>
+        <button class="novaMode" data-mode="wind">52 · Wind</button>
+        <button class="novaMode" data-mode="magnet">53 · Magnet</button>
+        <button class="novaMode" data-mode="atom">54 · Atom</button>
+        <button class="novaMode" data-mode="tachyon">55 · Tachyon</button>
+        <button class="novaMode" data-mode="dimension">56 · Dimension</button>
+        <button class="novaMode" data-mode="dream">57 · Dream</button>
+        <button class="novaMode" data-mode="rainbowwave">58 · Rainbow Wave</button>
+        <button class="novaMode" data-mode="cosmicdust">59 · Cosmic Dust</button>
+        <button class="novaMode" data-mode="energy">60 · Energy</button>
+
+        <!-- 61 - 80 -->
+
+        <button class="novaMode" data-mode="portalstorm">61 · Portal Storm</button>
+        <button class="novaMode" data-mode="quantumwave">62 · Quantum Wave</button>
+        <button class="novaMode" data-mode="stardust">63 · Stardust</button>
+        <button class="novaMode" data-mode="neoncity">64 · Neon City</button>
+        <button class="novaMode" data-mode="cybergrid">65 · Cyber Grid</button>
+        <button class="novaMode" data-mode="lightwave">66 · Light Wave</button>
+        <button class="novaMode" data-mode="fireworks">67 · Fireworks</button>
+        <button class="novaMode" data-mode="snowstorm">68 · Snowstorm</button>
+        <button class="novaMode" data-mode="starburst">69 · Starburst</button>
+        <button class="novaMode" data-mode="blackhole">70 · Black Hole</button>
+        <button class="novaMode" data-mode="wormhole">71 · Wormhole</button>
+        <button class="novaMode" data-mode="supernova">72 · Supernova</button>
+        <button class="novaMode" data-mode="auroraflow">73 · Aurora Flow</button>
+        <button class="novaMode" data-mode="crystalstorm">74 · Crystal Storm</button>
+        <button class="novaMode" data-mode="galaxyspin">75 · Galaxy Spin</button>
+        <button class="novaMode" data-mode="neonrain">76 · Neon Rain</button>
+        <button class="novaMode" data-mode="stargate">77 · Stargate</button>
+        <button class="novaMode" data-mode="energycore">78 · Energy Core</button>
+        <button class="novaMode" data-mode="void">79 · Void</button>
+        <button class="novaMode" data-mode="nova">80 · NOVA</button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         HERRAMIENTAS
+         =================================================== -->
+
+    <section
+      id="herramientas"
+      class="toolsSection section"
+    >
+
+      <div class="sectionHeading">
+
+        <div>
+          <span class="sectionLabel">CENTRO DE HERRAMIENTAS</span>
+
+          <h2>Todo lo que necesitas</h2>
+
+          <p>
+            Busca una herramienta o explora por categorías.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- Buscador -->
+
+      <div class="searchBox">
+
+        <span class="searchIcon">⌕</span>
+
+        <input
+          id="toolSearch"
+          type="search"
+          placeholder="Buscar herramienta..."
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Buscar herramienta"
+        >
+
+        <kbd>Ctrl K</kbd>
+
+      </div>
+
+
+      <!-- Categorías -->
+
+      <div
+        id="categories"
+        class="categories"
+        role="tablist"
+        aria-label="Categorías"
+      >
+
+        <button
+          class="category active"
+          data-category="all"
+          type="button"
+        >
+          Todas
+        </button>
+
+        <button
+          class="category"
+          data-category="math"
+          type="button"
+        >
+          Cálculo
+        </button>
+
+        <button
+          class="category"
+          data-category="convert"
+          type="button"
+        >
+          Conversión
+        </button>
+
+        <button
+          class="category"
+          data-category="time"
+          type="button"
+        >
+          Tiempo
+        </button>
+
+        <button
+          class="category"
+          data-category="text"
+          type="button"
+        >
+          Texto
+        </button>
+
+        <button
+          class="category"
+          data-category="organize"
+          type="button"
+        >
+          Organización
+        </button>
+
+        <button
+          class="category"
+          data-category="life"
+          type="button"
+        >
+          Vida diaria
+        </button>
+
+        <button
+          class="category"
+          data-category="fun"
+          type="button"
+        >
+          Entretenimiento
+        </button>
+
+      </div>
+
+
+      <!-- Herramientas dinámicas -->
+
+      <div
+        id="toolGrid"
+        class="toolGrid"
+        aria-live="polite"
+      ></div>
+
+
+      <!-- Sin resultados -->
+
+      <div
+        id="emptyTools"
+        class="emptyState"
+        hidden
+      >
+        <span>⌕</span>
+        <h3>No encontramos esa herramienta</h3>
+        <p>
+          Prueba con otro nombre o cambia de categoría.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ACCESO RÁPIDO
+         =================================================== -->
+
+    <section
+      id="quickSection"
+      class="quickSection section"
+    >
+
+      <div class="sectionHeading">
+
+        <div>
+          <span class="sectionLabel">ACCESO RÁPIDO</span>
+          <h2>Tus herramientas</h2>
+        </div>
+
+        <button
+          id="clearRecentBtn"
+          class="smallBtn"
+          type="button"
+        >
+          Limpiar recientes
+        </button>
+
+      </div>
+
+
+      <div
+        id="quickTools"
+        class="quickTools"
+      ></div>
+
+    </section>
+
+
+    <!-- ===================================================
+         DATOS
+         =================================================== -->
+
+    <section
+      id="dataSection"
+      class="dataSection section"
+    >
+
+      <div class="dataCard">
+
+        <div>
+          <span class="sectionLabel">TUS DATOS</span>
+
+          <h2>Guardar y recuperar</h2>
+
+          <p>
+            Exporta tus preferencias y datos de ÚtilHub
+            para conservarlos.
+          </p>
+        </div>
+
+        <div class="dataActions">
+
+          <button
+            id="exportBtn"
+            class="secondaryBtn"
+            type="button"
+          >
+            Exportar datos
+          </button>
+
+          <button
+            id="importBtn"
+            class="secondaryBtn"
+            type="button"
+          >
+            Importar datos
+          </button>
+
+          <input
+            id="importFile"
+            type="file"
+            accept=".json,application/json"
+            hidden
+          >
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       PANEL DE HERRAMIENTA
+       ===================================================== -->
+
+  <aside
+    id="toolPanel"
+    class="toolPanel"
+    aria-hidden="true"
+    aria-labelledby="toolPanelTitle"
+  >
+
+    <div
+      class="toolPanelBackdrop"
+      data-close-tool
+    ></div>
+
+    <div class="toolPanelBox">
+
+      <div class="toolPanelHeader">
+
+        <div class="toolPanelHeading">
+
+          <span
+            id="toolPanelIcon"
+            class="toolPanelIcon"
+          >
+            ✦
+          </span>
+
+          <div>
+
+            <small id="toolPanelCategory">
+              HERRAMIENTA
+            </small>
+
+            <h2 id="toolPanelTitle">
+              Herramienta
+            </h2>
+
+          </div>
+
+        </div>
+
+        <button
+          id="closeTool"
+          class="closeBtn"
+          type="button"
+          aria-label="Cerrar herramienta"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        id="toolContent"
+        class="toolContent"
+      ></div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MODAL GENERAL
+       ===================================================== -->
+
+  <div
+    id="modal"
+    class="modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modalBackdrop"
+      data-close-modal
+    ></div>
+
+    <div class="modalBox">
+
+      <button
+        class="closeBtn"
+        type="button"
+        data-close-modal
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+
+      <div id="modalContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+       ===================================================== -->
+
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  >
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Listo</span>
+  </div>
+
+
+  <!-- =====================================================
+       ESTADO DE CONEXIÓN
+       ===================================================== -->
+
+  <div
+    id="connectionStatus"
+    class="connectionStatus"
+    aria-live="polite"
+  >
+    <span></span>
+    <b>En línea</b>
+  </div>
+
+
+  <!-- =====================================================
+       PIE DE PÁGINA
+       ===================================================== -->
+
+  <footer class="footer">
+
+    <div class="footerBrand">
+
+      <strong>ÚtilHub V21</strong>
+
+      <span>
+        NOVA FLOW 5.0
+      </span>
+
+    </div>
+
+    <p>
+      Herramientas útiles para todos los días.
+    </p>
+
+    <span class="footerVersion">
+      80 MODOS • V21
+    </span>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+
+  <script src="./script.js" defer></script>
+
+</body>
+</html>
